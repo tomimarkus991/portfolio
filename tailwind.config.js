@@ -5,7 +5,7 @@ module.exports = {
     extend: {},
     fontFamily: {
       // sans: ["Varela Round", "sans-serif"],
-      // sans: ["Rubik", "sans-serif"],
+      sans: ["Rubik", "sans-serif"],
     },
   },
   plugins: [],

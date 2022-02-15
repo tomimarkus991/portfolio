@@ -1,26 +1,26 @@
-import { Canvas, MeshProps, useFrame, useLoader, useThree } from "@react-three/fiber";
-import { Suspense, useEffect, useRef, useState } from "react";
+import { OrbitControls } from "@react-three/drei";
+import { Canvas, MeshProps, useLoader } from "@react-three/fiber";
+import { Suspense, useRef } from "react";
 import { TextureLoader } from "three";
-import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 
+// import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 // "@react-three/drei" <OrbitControls autoRotate />;
-
 import moonImage from "./moon.jpg";
 import moonDensityImage from "./moon_density.jpg";
 
-const CameraController = () => {
-  const { camera, gl } = useThree();
-  useEffect(() => {
-    const controls = new OrbitControls(camera, gl.domElement);
-    controls.enableZoom = false;
-    controls.minDistance = 1;
-    controls.maxDistance = 15;
-    return () => {
-      controls.dispose();
-    };
-  }, [camera, gl]);
-  return null;
-};
+// const CameraController = () => {
+//   const { camera, gl } = useThree();
+//   useEffect(() => {
+//     const controls = new OrbitControls(camera, gl.domElement);
+//     controls.enableZoom = false;
+//     controls.minDistance = 1;
+//     controls.maxDistance = 15;
+//     return () => {
+//       controls.dispose();
+//     };
+//   }, [camera, gl]);
+//   return null;
+// };
 
 const App = () => {
   const Box = (props: any) => {
@@ -28,15 +28,13 @@ const App = () => {
 
     // This reference gives us direct access to the THREE.Mesh object
     const ref = useRef<MeshProps>(null);
-    // Hold state for hovered and clicked events
-    const [clicked, click] = useState(false);
 
     // Subscribe this component to the render-loop, rotate the mesh every frame
     // @ts-ignore
-    useFrame(() => (ref.current.rotation.y += 0.002));
+    // useFrame(() => (ref.current.rotation.y += 0.002));
 
     return (
-      <mesh {...props} ref={ref} scale={1} onClick={() => click(!clicked)}>
+      <mesh {...props} ref={ref} scale={1}>
         <sphereBufferGeometry args={[1, 100, 100]} />
         <meshStandardMaterial attach="material" map={textureMap} normalMap={densityMap} />
       </mesh>
@@ -46,7 +44,8 @@ const App = () => {
     <>
       <Canvas className="min-h-full">
         <Suspense fallback={null}>
-          <CameraController />
+          {/* <CameraController /> */}
+          <OrbitControls autoRotate />
           <ambientLight intensity={1} />
           {/* <directionalLight color="red" position={[0, 0, 5]} /> */}
           <pointLight position={[5, 10, 10]} />
