@@ -11,8 +11,17 @@
 html,
 body {
   height: 100vh;
+  background-color: #191d22;
 }
 
 #root {
   height: 100%;
+}
+
+.react-dat-gui-relative-position {
+  position: relative;
+  margin-top: 2em;
+  width: 300px;
+  min-width: 300px;
+  right: 0;
 }
